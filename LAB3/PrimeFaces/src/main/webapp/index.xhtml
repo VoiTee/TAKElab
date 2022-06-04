@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+>
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+<h:body>
+        Hello from Facelets
+        <p:tabView>
+            <p:tab title="Form">
+                <h:form>
+                    <p:growl id="growl" showDetail="true" />
+                    <p:spinner id="number1" value="#{ManagedBean.number1}" required="true"/>
+                    +
+                    <p:spinner id="number2" value="#{ManagedBean.number2}" required="true"/>
+                    <p:commandButton label="Sum" title="Sum" update="growl result date" action="#{ManagedBean.sum()}" />
+                    =
+                    <h:outputText id="result" value="#{ManagedBean.sum}" />
+                    <br></br>
+                    <h:outputText id="date" value="#{ManagedBean.date}"></h:outputText>
+                </h:form>
+            </p:tab>
+            <p:tab title="Table">
+                <p:dataTable var="student" rows="20" paginator="true" value="#{tableBean.students}" sortMode="multiple" allowUnsorting="true"
+                             paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" rowsPerPageTemplate="5,10,{ShowAll|'All'}">
+                    <p:column sortBy="#{student.name}" headerText="Name">
+                        <h:outputText value="#{student.name}"/>
+                    </p:column>
+                    <p:column sortBy="#{student.surname}" headerText="Surname">
+                        <h:outputText value="#{student.surname}"/>
+                    </p:column>
+                    <p:column sortBy="#{student.mean}" headerText="Mean">
+                        <h:outputText value="#{student.mean}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Chart">
+                <p:chart type="line" model="#{chartBean.chart}" />
+            </p:tab>
+        </p:tabView>
+    </h:body>
+</html>
+
